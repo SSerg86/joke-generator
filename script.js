@@ -9,7 +9,6 @@ import {
 } from './variables.js';
 
 // CONTROLLERS
-
 const controller = (link) => {
   return fetch(link).then((response) =>
     response.ok ? response.json() : Promise.reject(response.statusText),
@@ -17,7 +16,6 @@ const controller = (link) => {
 };
 
 // GET LIST OF CATEGORIES
-
 const getListOfCategories = (link) => {
   controller(link)
     .then((categories) =>
@@ -77,7 +75,6 @@ const getRandomeJoke = (link) => {
 };
 
 // HANDLE CHECKBOX INPUT
-
 const handleCheckbox = () => {
   Array.from(checkboxes).forEach((el) =>
     el.addEventListener('change', (e) => {
@@ -100,7 +97,6 @@ const handleCheckbox = () => {
 };
 
 // HEART CLICK
-
 Array.from(HEART).forEach((el) =>
   el.addEventListener('click', () => {
     if (el.classList.contains('like')) {
@@ -116,7 +112,6 @@ Array.from(HEART).forEach((el) =>
 // ADD FAVOURITE
 
 // APP LOAD
-
 const app = () => {
   getListOfCategories(CATEGORIES_LINK);
   handleCheckbox();
