@@ -1,0 +1,136 @@
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  color: #333333;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+.app-main {
+  flex: 2;
+  padding-top: 9rem;
+}
+
+.app-favourite {
+  flex: 1;
+  background: #f8f8f8;
+  color: #ababab;
+  padding: 40px;
+}
+
+.app-favourite_title {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.category-checkbox > input {
+  margin: 0;
+}
+
+.title {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 44px;
+}
+
+.greeting {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 44px;
+}
+
+.form-category_controls {
+  margin-bottom: 10px;
+}
+.form-category_controls label {
+  margin-left: 10px;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.form-category_list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-category__radio_btn input[type='radio'] {
+  display: none;
+}
+
+.form-category__radio_btn label {
+  display: inline-block;
+  color: #ababab;
+  margin: 0 5px 5px 0;
+  cursor: pointer;
+  padding: 6px 15px;
+  border: 1px solid #d6d5d5;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Checked */
+.form-category__radio_btn input[type='radio']:checked + label {
+  background: #d6d5d5;
+  color: #333333;
+}
+
+/* Hover */
+.form-category__radio_btn label:hover {
+  color: #666;
+}
+
+/* Disabled */
+.form-category__radio_btn input[type='radio']:disabled + label {
+  background: #efefef;
+  color: #666;
+}
+
+.form-btn {
+  padding: 10px 40px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px;
+  color: #ffffff;
+  background: linear-gradient(90.55deg, #8ea7ff 0%, #7291ff 100%);
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.form-category_search {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 15px;
+  border: 2px solid #333333;
+  border-radius: 10px;
+}
+
+.hidden {
+  display: none;
+}

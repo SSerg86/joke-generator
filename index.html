@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="app-main">
+      <div class="container">
+        <h1 class="title">Hey!</h1>
+        <p class="greeting">Let's try to find a joke for you:</p>
+        <form class="form">
+          <div class="form-category_controls">
+            <input
+              type="radio"
+              id="randomJoke"
+              name="filterCategory"
+              checked
+              data-id="filter"
+            />
+            <label for="randomJoke">Random</label>
+          </div>
+
+          <div class="form-category_controls">
+            <input
+              type="radio"
+              id="categoryJoke"
+              name="filterCategory"
+              data-id="filter"
+            />
+            <label for="categoryJoke">From categories</label>
+
+            <ul id="listOfCategories" class="form-category_list hidden"></ul>
+          </div>
+          <div class="form-category_controls">
+            <input
+              type="radio"
+              id="searchJoke"
+              name="filterCategory"
+              data-id="filter"
+            />
+            <label for="searchJoke">Search</label>
+            <input
+              type="text"
+              class="form-category_search hidden"
+              placeholder="Free text search..."
+            />
+          </div>
+          <button class="form-btn" type="submit">Get a Joke</button>
+        </form>
+      </div>
+    </main>
+    <aside class="app-favourite">
+      <p class="app-favourite_title">Favourite</p>
+    </aside>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
