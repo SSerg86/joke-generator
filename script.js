@@ -1,5 +1,6 @@
 import {
   CATEGORIES_LINK,
+  HEART,
   listOfCategories,
   checkboxes,
   searchInput,
@@ -64,6 +65,18 @@ const handleCheckbox = () => {
     }),
   );
 };
+
+// HEART CLICK
+
+HEART.addEventListener('click', () => {
+  if (HEART.classList.contains('like')) {
+    HEART.classList.remove('like', 'fas');
+    HEART.classList.add('far');
+  } else {
+    HEART.classList.remove('far');
+    HEART.classList.add('like', 'fas');
+  }
+});
 
 // APP LOAD
 

@@ -131,6 +131,30 @@ button:focus {
   border-radius: 10px;
 }
 
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 40px;
+  background: #f8f8f8;
+  border-radius: 20px;
+  padding: 40px;
+}
+
+.heart-btn {
+  align-self: flex-end;
+}
+
+.fa-heart-o {
+  color: red;
+  cursor: pointer;
+}
+
+.fa-heart {
+  color: red;
+  cursor: pointer;
+}
+
 .hidden {
   display: none;
 }
