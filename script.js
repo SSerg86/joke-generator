@@ -43,32 +43,39 @@ const getListOfCategories = (link) => {
     .catch((err) => console.err(err));
 };
 
+// CREATE CARD
+const createCard = (obj) => {
+  return `
+  <div class="card">
+          <span class="card-heart_btn">
+            <i class="far fa-heart heart" id="heart"></i>
+          </span>
+          <div class="card-info">
+            <div>
+              <div class="card-img"></div>
+            </div>
+            <div class="card-inner">
+              <span>id:</span
+              ><a href="${obj.url}" class="card-id_link">${obj.id}</a>
+              <p class="card-text">
+                ${obj.value}
+              </p>
+              <div class="card-footer">
+                <span>Last update: ${obj.updated_at}</span>
+                <div class="card-joke_category">${
+                  obj.categories.length > 0 ? obj.categorie : `random`
+                }</div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+};
+
 // GET RANDOME JOKE
 const getRandomeJoke = (link) => {
   controller(link)
     .then((joke) => {
-      return `
-    <div class="card">
-            <span class="card-heart_btn">
-              <i class="far fa-heart heart" id="heart"></i>
-            </span>
-            <div class="card-info">
-              <div>
-                <div class="card-img"></div>
-              </div>
-              <div class="card-inner">
-                <span>id:</span
-                ><a href="${joke.url}" class="card-id_link">${joke.id}</a>
-                <p class="card-text">
-                  ${joke.value}
-                </p>
-                <div class="card-footer">
-                  <span>Last update: ${joke.updated_at}</span>
-                  <div class="card-joke_category">random</div>
-                </div>
-              </div>
-            </div>
-          </div>`;
+      return createCard(joke);
     })
     .then((listStr) => (CARDS_LIST.innerHTML += listStr))
     .catch((err) => console.err(err));
