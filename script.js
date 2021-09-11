@@ -68,15 +68,19 @@ const handleCheckbox = () => {
 
 // HEART CLICK
 
-HEART.addEventListener('click', () => {
-  if (HEART.classList.contains('like')) {
-    HEART.classList.remove('like', 'fas');
-    HEART.classList.add('far');
-  } else {
-    HEART.classList.remove('far');
-    HEART.classList.add('like', 'fas');
-  }
-});
+Array.from(HEART).forEach((el) =>
+  el.addEventListener('click', () => {
+    if (el.classList.contains('like')) {
+      el.classList.remove('like', 'fas');
+      el.classList.add('far');
+    } else {
+      el.classList.remove('far');
+      el.classList.add('like', 'fas');
+    }
+  }),
+);
+
+// ADD FAVOURITE
 
 // APP LOAD
 

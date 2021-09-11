@@ -157,7 +157,7 @@ button:focus {
 .card-img {
   width: 40px;
   height: 40px;
-  background: url(./assets/Group\ 1.png) no-repeat;
+  background: url(./assets/MSG_white.png) no-repeat;
   background-size: contain;
 }
 
@@ -203,6 +203,18 @@ button:focus {
   background: #ffffff;
   border-radius: 6px;
   text-transform: uppercase;
+}
+
+.app-favourite .card {
+  background-color: #ffffff;
+  border: 1px solid #f8f8f8;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.app-favourite .card-img {
+  background: url(./assets/MSG_grey.png) no-repeat;
 }
 .hidden {
   display: none;
