@@ -1,6 +1,8 @@
 import {
   CATEGORIES_LINK,
   HEART,
+  RANDOME_JOKE,
+  CARDS_LIST,
   listOfCategories,
   checkboxes,
   searchInput,
@@ -40,6 +42,37 @@ const getListOfCategories = (link) => {
         .join(''),
     )
     .then((listStr) => (listOfCategories.innerHTML += listStr))
+    .catch((err) => console.err(err));
+};
+
+// GET RANDOME JOKE
+const getRandomeJoke = (link) => {
+  controller(link)
+    .then((joke) => {
+      return `
+    <div class="card">
+            <span class="card-heart_btn">
+              <i class="far fa-heart heart" id="heart"></i>
+            </span>
+            <div class="card-info">
+              <div>
+                <div class="card-img"></div>
+              </div>
+              <div class="card-inner">
+                <span>id:</span
+                ><a href="${joke.url}" class="card-id_link">${joke.id}</a>
+                <p class="card-text">
+                  ${joke.value}
+                </p>
+                <div class="card-footer">
+                  <span>Last update: ${joke.updated_at}</span>
+                  <div class="card-joke_category">random</div>
+                </div>
+              </div>
+            </div>
+          </div>`;
+    })
+    .then((listStr) => (CARDS_LIST.innerHTML += listStr))
     .catch((err) => console.err(err));
 };
 
@@ -87,6 +120,7 @@ Array.from(HEART).forEach((el) =>
 const app = () => {
   getListOfCategories(CATEGORIES_LINK);
   handleCheckbox();
+  getRandomeJoke(RANDOME_JOKE);
 };
 
 app();
