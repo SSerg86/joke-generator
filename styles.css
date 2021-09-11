@@ -134,14 +134,13 @@ button:focus {
 .card {
   display: flex;
   flex-direction: column;
-  width: 100%;
   margin-top: 40px;
   background: #f8f8f8;
   border-radius: 20px;
   padding: 40px;
 }
 
-.heart-btn {
+.card-heart_btn {
   align-self: flex-end;
 }
 
@@ -155,6 +154,56 @@ button:focus {
   cursor: pointer;
 }
 
+.card-img {
+  width: 40px;
+  height: 40px;
+  background: url(./assets/Group\ 1.png) no-repeat;
+  background-size: contain;
+}
+
+.card-info {
+  display: flex;
+}
+
+.card-inner {
+  margin-left: 20px;
+}
+.card-inner > span {
+  text-transform: uppercase;
+  margin-right: 5px;
+}
+.card-inner span,
+.card-inner a,
+.card-joke_category {
+  font-size: 10px;
+  line-height: 14px;
+}
+
+.card-text {
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-footer > span {
+  color: #ababab;
+}
+
+.card-joke_category {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 107px;
+  height: 24px;
+  background: #ffffff;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
 .hidden {
   display: none;
 }
