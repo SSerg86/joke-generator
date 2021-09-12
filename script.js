@@ -45,6 +45,7 @@ const getListOfCategories = (link) => {
 
 // CREATE CARD
 const createCard = (obj) => {
+  const { url, id, value, categorie, updated_at, categories } = obj;
   return `
   <div class="card">
           <span class="card-heart_btn">
@@ -56,14 +57,14 @@ const createCard = (obj) => {
             </div>
             <div class="card-inner">
               <span>id:</span
-              ><a href="${obj.url}" class="card-id_link">${obj.id}</a>
+              ><a href="${url}" class="card-id_link">${id}</a>
               <p class="card-text">
-                ${obj.value}
+                ${value}
               </p>
               <div class="card-footer">
-                <span>Last update: ${obj.updated_at}</span>
+                <span>Last update: ${updated_at}</span>
                 <div class="card-joke_category">${
-                  obj.categories.length > 0 ? obj.categorie : `random`
+                  categories.length > 0 ? categorie : `random`
                 }</div>
               </div>
             </div>
