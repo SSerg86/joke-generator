@@ -20,7 +20,7 @@
         <h1 class="title">Hey!</h1>
         <p class="greeting">Let's try to find a joke for you:</p>
         <!-- FORM -->
-        <form class="form">
+        <form class="form" id="filterForm">
           <div class="form-category_controls">
             <input
               type="radio"
@@ -28,6 +28,7 @@
               name="filterCategory"
               checked
               data-id="filter"
+              value="random"
             />
             <label for="randomJoke">Random</label>
           </div>
@@ -38,6 +39,7 @@
               id="categoryJoke"
               name="filterCategory"
               data-id="filter"
+              value="category"
             />
             <label for="categoryJoke">From categories</label>
 
@@ -49,12 +51,14 @@
               id="searchJoke"
               name="filterCategory"
               data-id="filter"
+              value="search"
             />
             <label for="searchJoke">Search</label>
             <input
               type="text"
               class="form-category_search hidden"
               placeholder="Free text search..."
+              value="hello"
             />
           </div>
           <button class="form-btn" type="submit">Get a Joke</button>

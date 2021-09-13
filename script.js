@@ -3,15 +3,17 @@ import {
   HEART,
   RANDOME_JOKE,
   CARDS_LIST,
+  FORM,
+  API,
   listOfCategories,
   checkboxes,
-  searchInput,
+  SEARCH_INPUT,
 } from './variables.js';
 
 // CONTROLLERS
 const controller = (link) => {
   return fetch(link).then((response) =>
-    response.ok ? response.json() : Promise.reject(response.statusText),
+    response.ok ? response.json() : Promise.reject(response.statusText)
   );
 };
 
@@ -27,6 +29,7 @@ const getListOfCategories = (link) => {
                           type="radio" 
                           id="${cat}Category" 
                           name="jokeCategory" 
+                          value="${cat}"
                           ${!index ? 'checked' : ''}
                           />
                       <label 
@@ -35,17 +38,60 @@ const getListOfCategories = (link) => {
                           ${cat}
                       </label>
                     </li>
-          `,
+          `
         )
-        .join(''),
+        .join('')
     )
     .then((listStr) => (listOfCategories.innerHTML += listStr))
     .catch((err) => console.err(err));
 };
 
+// HANDLE CHECKBOX INPUT
+const handleCheckbox = () => {
+  checkboxes.forEach((el) =>
+    el.addEventListener('change', (e) => {
+      e.target.id === 'categoryJoke'
+        ? listOfCategories.classList.remove('hidden')
+        : listOfCategories.classList.add('hidden');
+      e.target.id === 'searchJoke'
+        ? SEARCH_INPUT.classList.remove('hidden')
+        : SEARCH_INPUT.classList.add('hidden');
+    })
+  );
+};
+
+// FORM SUBMIT
+const getFormSubmit = (form) => {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    let checkboxValue = form.querySelector(
+        `input[name="filterCategory"]:checked`
+      ).value,
+      url = API;
+
+    switch (checkboxValue) {
+      case 'random':
+        url += `/random`;
+        break;
+      case 'category':
+        let checkedCategory = form.querySelector(
+          `input[name="jokeCategory"]:checked`
+        ).value;
+        url += `/random?category=${checkedCategory}`;
+        break;
+      case 'search':
+        url += `/search?query=${SEARCH_INPUT.value}`;
+        break;
+    }
+
+    getJoke(url);
+  });
+};
+
 // CREATE CARD
 const createCard = (obj) => {
-  const { url, id, value, categorie, updated_at, categories } = obj;
+  const { url, id, value, updated_at, categories } = obj;
   return `
   <div class="card">
           <span class="card-heart_btn">
@@ -64,7 +110,7 @@ const createCard = (obj) => {
               <div class="card-footer">
                 <span>Last update: ${updated_at}</span>
                 <div class="card-joke_category">${
-                  categories.length > 0 ? categorie : `random`
+                  categories.length > 0 ? categories[0] : `random`
                 }</div>
               </div>
             </div>
@@ -72,49 +118,23 @@ const createCard = (obj) => {
         </div>`;
 };
 
-// GET RANDOME JOKE
-const getRandomeJoke = (link) => {
+// GET JOKE
+const getJoke = (link) => {
   controller(link)
-    .then((joke) => {
-      return createCard(joke);
+    .then((jokes) => {
+      return jokes.result
+        ? jokes.result.map((el) => createCard(el)).join('')
+        : createCard(jokes);
     })
     .then((listStr) => (CARDS_LIST.innerHTML += listStr))
     .catch((err) => console.err(err));
 };
 
-// HANDLE CHECKBOX INPUT
-const handleCheckbox = () => {
-  Array.from(checkboxes).forEach((el) =>
-    el.addEventListener('change', (e) => {
-      switch (e.target.id) {
-        case 'categoryJoke':
-          listOfCategories.classList.remove('hidden');
-          searchInput.classList.add('hidden');
-          break;
-        case 'searchJoke':
-          searchInput.classList.remove('hidden');
-          listOfCategories.classList.add('hidden');
-          break;
-        case 'randomJoke':
-          listOfCategories.classList.add('hidden');
-          searchInput.classList.add('hidden');
-          break;
-      }
-    }),
-  );
-};
-
 // HEART CLICK
 Array.from(HEART).forEach((el) =>
   el.addEventListener('click', () => {
-    if (el.classList.contains('like')) {
-      el.classList.remove('like', 'fas');
-      el.classList.add('far');
-    } else {
-      el.classList.remove('far');
-      el.classList.add('like', 'fas');
-    }
-  }),
+    el.classList.toggle('fas');
+  })
 );
 
 // ADD FAVOURITE
@@ -123,7 +143,7 @@ Array.from(HEART).forEach((el) =>
 const app = () => {
   getListOfCategories(CATEGORIES_LINK);
   handleCheckbox();
-  getRandomeJoke(RANDOME_JOKE);
+  getFormSubmit(FORM);
 };
 
 app();
