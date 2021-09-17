@@ -89,33 +89,55 @@ const getFormSubmit = (form) => {
   });
 };
 
+// CREATE HEART BTN
+const heartBTN = () => {
+  let heartBtn = document.createElement('span');
+  heartBtn.className = `card-heart_btn`;
+
+  let icon = document.createElement('i');
+  icon.className = 'far fa-heart heart';
+  icon.id = 'heart';
+  icon.addEventListener('click', (e) => {
+    e.target.classList.toggle('fas');
+  });
+  heartBtn.append(icon);
+
+  return heartBtn;
+};
+
 // CREATE CARD
 const createCard = (obj) => {
   const { url, id, value, updated_at, categories } = obj;
-  return `
-  <div class="card">
-          <span class="card-heart_btn">
-            <i class="far fa-heart heart" id="heart"></i>
-          </span>
-          <div class="card-info">
-            <div>
-              <div class="card-img"></div>
-            </div>
-            <div class="card-inner">
-              <span>id:</span
-              ><a href="${url}" class="card-id_link">${id}</a>
-              <p class="card-text">
-                ${value}
-              </p>
-              <div class="card-footer">
-                <span>Last update: ${updated_at}</span>
-                <div class="card-joke_category">${
-                  categories.length > 0 ? categories[0] : `random`
-                }</div>
-              </div>
-            </div>
-          </div>
-        </div>`;
+
+  let jokeCard = document.createElement('div');
+  jokeCard.className = `card`;
+  jokeCard.dataset.id = `j-` + id;
+
+  let heartBtn = heartBTN();
+
+  jokeCard.append(heartBtn);
+
+  let innerCard = document.createElement('div');
+  innerCard.className = `card-info`;
+  innerCard.innerHTML = `<div>
+                            <div class="card-img"></div>
+                          </div>
+                          <div class="card-inner">
+                            <span>id:</span
+                            ><a href="${url}" class="card-id_link">${id}</a>
+                            <p class="card-text">
+                              ${value}
+                            </p>
+                            <div class="card-footer">
+                              <span>Last update: ${updated_at}</span>
+                              <div class="card-joke_category">${
+                                categories.length > 0 ? categories[0] : `random`
+                              }</div>
+                            </div>
+                          </div>`;
+  jokeCard.append(innerCard);
+
+  return jokeCard;
 };
 
 // GET JOKE
@@ -123,19 +145,18 @@ const getJoke = (link) => {
   controller(link)
     .then((jokes) => {
       return jokes.result
-        ? jokes.result.map((el) => createCard(el)).join('')
+        ? jokes.result.map((joke) => createCard(joke))
         : createCard(jokes);
     })
-    .then((listStr) => (CARDS_LIST.innerHTML += listStr))
+    .then((listStr) => {
+      CARDS_LIST.innerHTML = '';
+      Array.isArray(listStr)
+        ? listStr.forEach((joke) => CARDS_LIST.append(joke))
+        : CARDS_LIST.append(listStr);
+    })
+
     .catch((err) => console.err(err));
 };
-
-// HEART CLICK
-Array.from(HEART).forEach((el) =>
-  el.addEventListener('click', () => {
-    el.classList.toggle('fas');
-  })
-);
 
 // ADD FAVOURITE
 

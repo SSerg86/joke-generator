@@ -7,7 +7,7 @@ const API = 'https://api.chucknorris.io/jokes';
 const listOfCategories = document.querySelector('#listOfCategories');
 const checkboxes = document.querySelectorAll('input[data-id="filter"]');
 const SEARCH_INPUT = document.querySelector('.form-category_search');
-const HEART = document.querySelectorAll('.heart');
+const HEART = document.querySelectorAll('.card-heart_btn');
 const CARDS_LIST = document.querySelector('#cardsList');
 const FORM = document.querySelector('#filterForm');
 

@@ -143,16 +143,15 @@ button:focus {
 
 .card-heart_btn {
   align-self: flex-end;
+  cursor: pointer;
 }
 
 .fa-heart-o {
   color: red;
-  cursor: pointer;
 }
 
 .fa-heart {
   color: red;
-  cursor: pointer;
 }
 
 .card-img {
