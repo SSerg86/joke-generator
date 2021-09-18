@@ -17,7 +17,14 @@
   <body>
     <main class="app-main">
       <div class="container">
-        <h1 class="title">Hey!</h1>
+          <h1 class="title">Hey!</h1>
+          <div class="menu">
+            <div class="menu-bar" >
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+            </div>
+            <p class="menu_title">Favourite</p>  
+        </div>
         <p class="greeting">Let's try to find a joke for you:</p>
         <!-- FORM -->
         <form class="form" id="filterForm">
@@ -42,7 +49,7 @@
               value="category"
             />
             <label for="categoryJoke">From categories</label>
-
+            <!-- CATEGORIES -->
             <ul id="listOfCategories" class="form-category_list hidden"></ul>
           </div>
           <div class="form-category_controls">
@@ -67,10 +74,11 @@
         <section class="cards" id="cardsList"></section>
     </main>
     <!-- FAVORITE  -->
-    <aside class="app-favourite ">
+    <aside class="app-favourite fave-bar_hidden">
        <p class="app-favourite_title">Favourite</p>
     </aside>
 
     <script type="module" src="./script.js"></script>
+   
   </body>
 </html>

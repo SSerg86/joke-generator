@@ -10,6 +10,7 @@ const SEARCH_INPUT = document.querySelector('.form-category_search');
 const JOKES_LIST = document.querySelector('#cardsList');
 const FAVE_LIST = document.querySelector('.app-favourite');
 const FORM = document.querySelector('#filterForm');
+const MENU_ICON = document.querySelector('.menu-bar');
 
 //STORAGE
 
@@ -26,4 +27,5 @@ export {
   FORM,
   FAVE_LIST,
   STORAGE,
+  MENU_ICON,
 };

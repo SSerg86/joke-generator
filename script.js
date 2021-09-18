@@ -8,6 +8,7 @@ import {
   listOfCategories,
   checkboxes,
   SEARCH_INPUT,
+  MENU_ICON,
 } from './variables.js';
 
 // CONTROLLERS
@@ -197,8 +198,6 @@ const addToFav = (joke, event) => {
 const renderFavJokes = () => {
   let storage = getStorage(STORAGE);
 
-  FAVE_LIST.innerHTML = ``;
-
   if (storage) {
     storage.forEach((joke) => FAVE_LIST.append(createJokeCard(joke)));
   }
@@ -221,6 +220,12 @@ const getJoke = (link) => {
 
     .catch((err) => console.err(err));
 };
+
+// MENU BUTTON
+MENU_ICON.addEventListener('click', () => {
+  MENU_ICON.classList.toggle('change');
+  FAVE_LIST.classList.toggle('fave-bar_hidden');
+});
 
 // APP LOAD
 const app = () => {

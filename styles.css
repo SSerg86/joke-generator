@@ -4,11 +4,13 @@ ul {
 }
 
 body {
+  min-height: 100vh;
   margin: 0;
+  margin-left: 10px;
+  margin-bottom: 10px;
   padding: 0;
   display: flex;
   color: #333333;
-  min-height: 100vh;
   box-sizing: border-box;
 }
 
@@ -220,4 +222,72 @@ button:focus {
 }
 .hidden {
   display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    color: #ababab;
+  }
+
+  .menu_title {
+    margin-left: 10px;
+  }
+  .menu-bar {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #333;
+    cursor: pointer;
+  }
+
+  .bar1,
+  .bar2 {
+    width: 14px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: #fff;
+    margin: 0 auto;
+    transition: 0.4s;
+  }
+
+  .bar1 {
+    margin-top: 10px;
+  }
+  .bar2 {
+    margin-top: 4px;
+  }
+  .change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-2px, 2px);
+    transform: rotate(-45deg) translate(-2px, 2px);
+  }
+
+  .change .bar2 {
+    -webkit-transform: rotate(45deg) translate(-2px, -2px);
+    transform: rotate(45deg) translate(-2px, -2px);
+  }
+
+  .app-main {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .fave-bar_hidden {
+    display: none;
+  }
+
+  .app-favourite_title {
+    display: none;
+  }
 }
