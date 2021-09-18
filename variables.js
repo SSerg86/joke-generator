@@ -7,18 +7,23 @@ const API = 'https://api.chucknorris.io/jokes';
 const listOfCategories = document.querySelector('#listOfCategories');
 const checkboxes = document.querySelectorAll('input[data-id="filter"]');
 const SEARCH_INPUT = document.querySelector('.form-category_search');
-const HEART = document.querySelectorAll('.card-heart_btn');
-const CARDS_LIST = document.querySelector('#cardsList');
+const JOKES_LIST = document.querySelector('#cardsList');
+const FAVE_LIST = document.querySelector('.app-favourite');
 const FORM = document.querySelector('#filterForm');
+
+//STORAGE
+
+const STORAGE = `jokes`;
 
 export {
   CATEGORIES_LINK,
-  HEART,
   RANDOME_JOKE,
   API,
   listOfCategories,
   checkboxes,
   SEARCH_INPUT,
-  CARDS_LIST,
+  JOKES_LIST,
   FORM,
+  FAVE_LIST,
+  STORAGE,
 };

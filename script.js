@@ -1,8 +1,8 @@
 import {
   CATEGORIES_LINK,
-  HEART,
-  RANDOME_JOKE,
-  CARDS_LIST,
+  STORAGE,
+  FAVE_LIST,
+  JOKES_LIST,
   FORM,
   API,
   listOfCategories,
@@ -11,10 +11,40 @@ import {
 } from './variables.js';
 
 // CONTROLLERS
-const controller = (link) => {
-  return fetch(link).then((response) =>
-    response.ok ? response.json() : Promise.reject(response.statusText)
-  );
+const controller = async (link) => {
+  const response = await fetch(link);
+  return await (response.ok
+    ? response.json()
+    : Promise.reject(response.statusText));
+};
+
+//STORAGE
+const getStorage = (key) =>
+  localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : null;
+
+const setStorage = (key, item) => {
+  let storage = getStorage(key) ? getStorage(key) : new Array();
+
+  storage.push(item);
+  localStorage.setItem(key, JSON.stringify(storage));
+};
+
+const removeStorage = (key, indexItem) => {
+  let storage = getStorage(key) ? getStorage(key) : new Array();
+
+  storage.splice(indexItem, 1);
+  localStorage.setItem(key, JSON.stringify(storage));
+};
+
+const itemExistInStorage = (key, item) => {
+  let storage = getStorage(key),
+    itemIndex = -1;
+
+  if (storage) {
+    itemIndex = storage.findIndex((el) => el.id === item.id);
+  }
+
+  return itemIndex;
 };
 
 // GET LIST OF CATEGORIES
@@ -90,30 +120,32 @@ const getFormSubmit = (form) => {
 };
 
 // CREATE HEART BTN
-const heartBTN = () => {
+const createHeartBTN = (joke) => {
   let heartBtn = document.createElement('span');
   heartBtn.className = `card-heart_btn`;
 
   let icon = document.createElement('i');
-  icon.className = 'far fa-heart heart';
+
+  icon.className = joke.isFavourite
+    ? 'fas fa-heart heart'
+    : 'far fa-heart heart';
   icon.id = 'heart';
-  icon.addEventListener('click', (e) => {
-    e.target.classList.toggle('fas');
-  });
   heartBtn.append(icon);
 
   return heartBtn;
 };
 
 // CREATE CARD
-const createCard = (obj) => {
-  const { url, id, value, updated_at, categories } = obj;
+const createJokeCard = (joke) => {
+  const { url, id, value, updated_at, categories } = joke;
 
   let jokeCard = document.createElement('div');
   jokeCard.className = `card`;
-  jokeCard.dataset.id = `j-` + id;
+  jokeCard.dataset.id = `j_` + id;
 
-  let heartBtn = heartBTN();
+  let heartBtn = createHeartBTN(joke);
+
+  heartBtn.addEventListener('click', (event) => addToFav(joke, event));
 
   jokeCard.append(heartBtn);
 
@@ -140,31 +172,62 @@ const createCard = (obj) => {
   return jokeCard;
 };
 
+// ADD FAVOURITE
+const addToFav = (joke, event) => {
+  event.target.classList.toggle('fas');
+  let itemIndex = itemExistInStorage(STORAGE, joke);
+  joke.isFavourite = joke.isFavourite ? false : true;
+  if (itemIndex == -1) {
+    setStorage(STORAGE, joke);
+    let faveJoke = createJokeCard(joke);
+
+    FAVE_LIST.append(faveJoke);
+  } else {
+    removeStorage(STORAGE, itemIndex);
+    FAVE_LIST.querySelector(`div[data-id=j_${joke.id}]`).remove();
+    if (JOKES_LIST.querySelector(`div[data-id=j_${joke.id}] i`)) {
+      JOKES_LIST.querySelector(`div[data-id=j_${joke.id}] i`).classList.remove(
+        'fas'
+      );
+    }
+  }
+};
+
+// RENDER FAVE JOKES LIST
+const renderFavJokes = () => {
+  let storage = getStorage(STORAGE);
+
+  FAVE_LIST.innerHTML = ``;
+
+  if (storage) {
+    storage.forEach((joke) => FAVE_LIST.append(createJokeCard(joke)));
+  }
+};
+
 // GET JOKE
 const getJoke = (link) => {
   controller(link)
     .then((jokes) => {
       return jokes.result
-        ? jokes.result.map((joke) => createCard(joke))
-        : createCard(jokes);
+        ? jokes.result.map((joke) => createJokeCard(joke))
+        : createJokeCard(jokes);
     })
     .then((listStr) => {
-      CARDS_LIST.innerHTML = '';
+      JOKES_LIST.innerHTML = '';
       Array.isArray(listStr)
-        ? listStr.forEach((joke) => CARDS_LIST.append(joke))
-        : CARDS_LIST.append(listStr);
+        ? listStr.forEach((joke) => JOKES_LIST.append(joke))
+        : JOKES_LIST.append(listStr);
     })
 
     .catch((err) => console.err(err));
 };
-
-// ADD FAVOURITE
 
 // APP LOAD
 const app = () => {
   getListOfCategories(CATEGORIES_LINK);
   handleCheckbox();
   getFormSubmit(FORM);
+  renderFavJokes();
 };
 
 app();
