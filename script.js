@@ -224,7 +224,7 @@ const getJoke = (link) => {
 // MENU BUTTON
 MENU_ICON.addEventListener('click', () => {
   MENU_ICON.classList.toggle('change');
-  FAVE_LIST.classList.toggle('fave-bar_hidden');
+  FAVE_LIST.classList.toggle('toggle');
 });
 
 // APP LOAD
